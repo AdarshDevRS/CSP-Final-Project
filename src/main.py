@@ -49,7 +49,7 @@ turtleShapes = ["circle", "square", "turtle", "triangle"]
 cash = 0
 multiplier = 1 # player can upgrade variable so player can earn more cash per click.
 
-timer = 0 # Variable that user will pick.
+timer = 0 # Timer that user will pick.
 timerInterval = 1000 # 1000 milliseconds in 1 second
 
 multiplierUpgradePrice = 10 # The price that the multiplier upgrade will cost. This will increment to a higher price when player buys upgrade.
@@ -58,7 +58,7 @@ multiplierUpgradePrice = 10 # The price that the multiplier upgrade will cost. T
 timeLimit = int(input("How much time would you like? (Hint: Higher number = Higher score!): "))
 timer = timeLimit
 
-CanClick = True
+CanClick = True # Controls click
 
 #--- Functions ---#
 def click(x, y):
@@ -67,7 +67,7 @@ def click(x, y):
         gainCash()
         randomSpawn(True)
     else:
-        return
+        print("Time is up! Restart to play again!")
 
 def randomSpawn(CanSpawn): 
     if CanSpawn:
@@ -84,7 +84,7 @@ def randomSpawn(CanSpawn):
         clickTurtle.shapesize(5)
         clickTurtle.showturtle()
     else:
-        return
+        print("Thank you for playing!")
 
 
 def countdown(): # Timer system where if player does not click the turtle fast enough, it will move to another random position.
