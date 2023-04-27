@@ -43,6 +43,7 @@ timerTurtle.hideturtle()
 
 #--
 turtleColors = ["Purple", "Blue", "Red", "Green", "Yellow", "Black", "Brown", "Cyan"] # The colors the clickTurtle will appear in. (randomly)
+turtleShapes = ["circle", "square", "turtle", "triangle"]
 
 #--- Variables ---#
 cash = 0
@@ -57,34 +58,44 @@ multiplierUpgradePrice = 10 # The price that the multiplier upgrade will cost. T
 timeLimit = int(input("How much time would you like? (Hint: Higher number = Higher score!): "))
 timer = timeLimit
 
+CanClick = True
+
 #--- Functions ---#
 def click(x, y):
-    global timer
-    gainCash()
-    randomSpawn()
-   # timer = 1 # setting timer back to 1 when clicked.
+    if CanClick:
+        global timer
+        gainCash()
+        randomSpawn(True)
+    else:
+        return
 
-def randomSpawn(): 
-    randColor = rand.randint(0, 7) # 0 to 7 because the turtle colors list index starts from 0.
+def randomSpawn(CanSpawn): 
+    if CanSpawn:
+        randColor = rand.randint(0, 7) # 0 to 7 because the turtle colors list index starts from 0.
+        randShape = rand.randint(0, 3) # 4 shapes total and list starts from 0.
 
-    randX = rand.randint(-200, 200) 
-    randY = rand.randint(-20, 20)
+        randX = rand.randint(-200, 200) 
+        randY = rand.randint(-20, 20)
 
-    clickTurtle.hideturtle()
-    clickTurtle.goto(randX, randY)
-    clickTurtle.color(turtleColors[randColor])
-    clickTurtle.shapesize(20)
-    clickTurtle.showturtle()
+        clickTurtle.hideturtle()
+        clickTurtle.goto(randX, randY)
+        clickTurtle.color(turtleColors[randColor])
+        clickTurtle.shape(turtleShapes[randShape])
+        clickTurtle.shapesize(5)
+        clickTurtle.showturtle()
+    else:
+        return
 
 
 def countdown(): # Timer system where if player does not click the turtle fast enough, it will move to another random position.
     global timer
+    global CanClick
     timerTurtle.clear()
     if timer <= 0:
-        timerTurtle.write("Timer: " + str(timer), font=("Ariel", 20, "bold"), align="center")
-       # timer = 1
+        timerTurtle.write("TIME IS UP!", font=("Ariel", 20, "bold"), align="center")
         timerTurtle.getscreen().ontimer(countdown, timerInterval)
-        randomSpawn()
+        randomSpawn(False)
+        CanClick = False
     else:
         timerTurtle.write("Timer: " + str(timer), font=("Ariel", 20, "bold"), align="center")
         timer -= 1
