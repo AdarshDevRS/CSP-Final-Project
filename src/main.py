@@ -1,5 +1,6 @@
 # Click as fast as you can in a designated amount of time chosen by user. See how much cash the user gains in the certain time limit.
 
+# Importing Turtle and Random Module for this project.
 #--- Imports ---#
 import turtle as trtl
 import random as rand
